@@ -15,17 +15,17 @@ namespace PokeDex
     {
         Special_Attack, Special_Defence, Attack, Defence
     }
-    struct Pokimon
+    struct Pokemon
     {
-        string Name;
-        string Type;
-        int Level;
-        attack AttackType;
-        int Hp;
-        int Exp;
-        bool Legendary;
-        bool Shiny;
-        int Generation;
+        public string Name;
+        public string Type;
+        public int Level;
+        public attack AttackType;
+        public int Hp;
+        public int Exp;
+        public bool Legendary;
+        public bool Shiny;
+        public int Generation;
     }
     public partial class Form1 : Form
     {
@@ -41,9 +41,31 @@ namespace PokeDex
             {
                 StreamReader inFile = new StreamReader("Pokemon.txt");
                 string S = inFile.ReadToEnd();
+                ReadPokemon(S);
                 inFile.Close();
             }
-            
+
+
+        }
+        private void ReadPokemon(string s)
+        {
+            Pokemon p = new Pokemon();
+            string[] fields = s.Split('|');
+            p.Name = fields[0];
+            p.Type = fields[1];
+            p.Level = int.Parse(fields[2]);
+            p.AttackType =(attack)Enum.Parse(typeof(attack),fields[3]);
+            p.Hp = int.Parse(fields[4]);
+            p.Exp = int.Parse(fields[5]);
+            if (fields[6] == "True")
+                p.Legendary = true;
+            else
+                p.Legendary=false;
+            if (fields[7] == "True")
+                p.Shiny = true;
+            else
+                p.Shiny = false;
+            p.Generation = int.Parse(fields[8]);
 
         }
 
