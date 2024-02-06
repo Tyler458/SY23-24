@@ -39,7 +39,6 @@
             this.ShinycheckBox = new System.Windows.Forms.CheckBox();
             this.GenerationnumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.AttackTypenumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,11 +50,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.DebugtextBox = new System.Windows.Forms.TextBox();
+            this.Firstbutton = new System.Windows.Forms.Button();
+            this.Previousbutton = new System.Windows.Forms.Button();
+            this.Nextbutton = new System.Windows.Forms.Button();
+            this.Lastbutton = new System.Windows.Forms.Button();
+            this.Currentlabel = new System.Windows.Forms.Label();
+            this.AttackTypecomboBox = new System.Windows.Forms.ComboBox();
+            this.Newbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.LevelnumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HpnumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpnumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GenerationnumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AttackTypenumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // NametextBox
@@ -125,13 +130,6 @@
             this.GenerationnumericUpDown.Name = "GenerationnumericUpDown";
             this.GenerationnumericUpDown.Size = new System.Drawing.Size(156, 22);
             this.GenerationnumericUpDown.TabIndex = 8;
-            // 
-            // AttackTypenumericUpDown
-            // 
-            this.AttackTypenumericUpDown.Location = new System.Drawing.Point(181, 165);
-            this.AttackTypenumericUpDown.Name = "AttackTypenumericUpDown";
-            this.AttackTypenumericUpDown.Size = new System.Drawing.Size(156, 22);
-            this.AttackTypenumericUpDown.TabIndex = 9;
             // 
             // label1
             // 
@@ -216,7 +214,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(515, 116);
+            this.button1.Location = new System.Drawing.Point(551, 121);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 33);
             this.button1.TabIndex = 19;
@@ -226,18 +224,97 @@
             // 
             // DebugtextBox
             // 
-            this.DebugtextBox.Location = new System.Drawing.Point(515, 165);
+            this.DebugtextBox.Location = new System.Drawing.Point(551, 162);
             this.DebugtextBox.Multiline = true;
             this.DebugtextBox.Name = "DebugtextBox";
             this.DebugtextBox.Size = new System.Drawing.Size(237, 237);
             this.DebugtextBox.TabIndex = 20;
-            this.DebugtextBox.TextChanged += new System.EventHandler(this.DebugtextBox_TextChanged);
+            // 
+            // Firstbutton
+            // 
+            this.Firstbutton.Location = new System.Drawing.Point(456, 165);
+            this.Firstbutton.Name = "Firstbutton";
+            this.Firstbutton.Size = new System.Drawing.Size(89, 33);
+            this.Firstbutton.TabIndex = 22;
+            this.Firstbutton.Text = "First";
+            this.Firstbutton.UseVisualStyleBackColor = true;
+            this.Firstbutton.Click += new System.EventHandler(this.Firstbutton_Click);
+            // 
+            // Previousbutton
+            // 
+            this.Previousbutton.Location = new System.Drawing.Point(456, 220);
+            this.Previousbutton.Name = "Previousbutton";
+            this.Previousbutton.Size = new System.Drawing.Size(89, 33);
+            this.Previousbutton.TabIndex = 23;
+            this.Previousbutton.Text = "Previous";
+            this.Previousbutton.UseVisualStyleBackColor = true;
+            this.Previousbutton.Click += new System.EventHandler(this.Previousbutton_Click);
+            // 
+            // Nextbutton
+            // 
+            this.Nextbutton.Location = new System.Drawing.Point(456, 274);
+            this.Nextbutton.Name = "Nextbutton";
+            this.Nextbutton.Size = new System.Drawing.Size(89, 33);
+            this.Nextbutton.TabIndex = 24;
+            this.Nextbutton.Text = "Next";
+            this.Nextbutton.UseVisualStyleBackColor = true;
+            this.Nextbutton.Click += new System.EventHandler(this.Nextbutton_Click);
+            // 
+            // Lastbutton
+            // 
+            this.Lastbutton.Location = new System.Drawing.Point(456, 326);
+            this.Lastbutton.Name = "Lastbutton";
+            this.Lastbutton.Size = new System.Drawing.Size(89, 33);
+            this.Lastbutton.TabIndex = 25;
+            this.Lastbutton.Text = "Last";
+            this.Lastbutton.UseVisualStyleBackColor = true;
+            this.Lastbutton.Click += new System.EventHandler(this.Lastbutton_Click);
+            // 
+            // Currentlabel
+            // 
+            this.Currentlabel.AutoSize = true;
+            this.Currentlabel.BackColor = System.Drawing.SystemColors.Control;
+            this.Currentlabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Currentlabel.Location = new System.Drawing.Point(456, 64);
+            this.Currentlabel.Name = "Currentlabel";
+            this.Currentlabel.Size = new System.Drawing.Size(2, 18);
+            this.Currentlabel.TabIndex = 26;
+            // 
+            // AttackTypecomboBox
+            // 
+            this.AttackTypecomboBox.FormattingEnabled = true;
+            this.AttackTypecomboBox.Items.AddRange(new object[] {
+            "Special_Attack",
+            "Special_Defence",
+            "Attack",
+            "Defence"});
+            this.AttackTypecomboBox.Location = new System.Drawing.Point(181, 162);
+            this.AttackTypecomboBox.Name = "AttackTypecomboBox";
+            this.AttackTypecomboBox.Size = new System.Drawing.Size(137, 24);
+            this.AttackTypecomboBox.TabIndex = 27;
+            // 
+            // Newbutton
+            // 
+            this.Newbutton.Location = new System.Drawing.Point(699, 121);
+            this.Newbutton.Name = "Newbutton";
+            this.Newbutton.Size = new System.Drawing.Size(89, 33);
+            this.Newbutton.TabIndex = 28;
+            this.Newbutton.Text = "New";
+            this.Newbutton.UseVisualStyleBackColor = true;
+            this.Newbutton.Click += new System.EventHandler(this.Newbutton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Newbutton);
+            this.Controls.Add(this.AttackTypecomboBox);
+            this.Controls.Add(this.Currentlabel);
+            this.Controls.Add(this.Lastbutton);
+            this.Controls.Add(this.Nextbutton);
+            this.Controls.Add(this.Previousbutton);
+            this.Controls.Add(this.Firstbutton);
             this.Controls.Add(this.DebugtextBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
@@ -249,7 +326,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.AttackTypenumericUpDown);
             this.Controls.Add(this.GenerationnumericUpDown);
             this.Controls.Add(this.ShinycheckBox);
             this.Controls.Add(this.LegendarycheckBox);
@@ -260,12 +336,12 @@
             this.Controls.Add(this.NametextBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LevelnumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HpnumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExpnumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GenerationnumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AttackTypenumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,7 +359,6 @@
         private System.Windows.Forms.CheckBox ShinycheckBox;
         private System.Windows.Forms.NumericUpDown GenerationnumericUpDown;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.NumericUpDown AttackTypenumericUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -295,6 +370,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox DebugtextBox;
+        private System.Windows.Forms.Button Firstbutton;
+        private System.Windows.Forms.Button Previousbutton;
+        private System.Windows.Forms.Button Nextbutton;
+        private System.Windows.Forms.Button Lastbutton;
+        private System.Windows.Forms.Label Currentlabel;
+        private System.Windows.Forms.ComboBox AttackTypecomboBox;
+        private System.Windows.Forms.Button Newbutton;
     }
 }
 

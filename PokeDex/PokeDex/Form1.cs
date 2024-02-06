@@ -29,10 +29,17 @@ namespace PokeDex
     }
     public partial class Form1 : Form
     {
-
+        private int current;
+        private int count;
+        private Pokemon[] pokemons;
         public Form1()
         {
             InitializeComponent();
+            current = 0;
+            count = 0;
+            Currentlabel.Text = current.ToString();
+            pokemons = new Pokemon[50];
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,14 +47,21 @@ namespace PokeDex
             if (File.Exists("Pokemon.txt"))
             {
                 StreamReader inFile = new StreamReader("Pokemon.txt");
-                string S = inFile.ReadToEnd();
-                ReadPokemon(S);
+                while (!inFile.EndOfStream)
+                {
+                    string S = inFile.ReadLine();
+                    Pokemon p = ReadPokemon(S);
+                    pokemons[count] = p;
+                    count++;
+                }
                 inFile.Close();
+                ShowPokemon(pokemons[0]);
+
             }
 
 
         }
-        private void ReadPokemon(string s)
+        private Pokemon ReadPokemon(string s)
         {
             Pokemon p = new Pokemon();
             string[] fields = s.Split('|');
@@ -66,37 +80,148 @@ namespace PokeDex
             else
                 p.Shiny = false;
             p.Generation = int.Parse(fields[8]);
-
+          
+            return p;
+        }
+        public void save()
+        {
+            string tmp = " ";
+            tmp += NametextBox.Text;
+            tmp += "|";
+            tmp += TypetextBox.Text;
+            tmp += "|";
+            tmp += LevelnumericUpDown.Value;
+            tmp += "|";
+            tmp += AttackTypecomboBox.Text;
+            tmp += "|";
+            tmp += HpnumericUpDown.Value;
+            tmp += "|";
+            tmp += ExpnumericUpDown.Value;
+            tmp += "|";
+            tmp += LegendarycheckBox.Checked;
+            tmp += "|";
+            tmp += ShinycheckBox.Checked;
+            tmp += "|";
+            tmp += GenerationnumericUpDown.Value;
+            pokemons[current] = ReadPokemon(tmp);
+            
+            StreamWriter outFile = new StreamWriter("Pokemon.txt");
+            for (int i = 0; i < count; i++)
+            {
+                outFile.WriteLine(PokemonToString(pokemons[i]));
+            }
+            outFile.Close();
+            //outFile.Write(DebugtextBox.Text);
+            //outFile.Close();
         }
 
+        private string PokemonToString(Pokemon p)
+        {
+            string retVal = "";
+            retVal += p.Name;
+            retVal += "|";
+            retVal += p.Type.ToString();
+            retVal += "|";
+            retVal += p.Level.ToString();
+            retVal += "|";
+            retVal += p.AttackType.ToString();
+            retVal += "|";
+            retVal += p.Hp.ToString();
+            retVal += "|";
+            retVal += p.Exp.ToString();
+            retVal += "|";
+            retVal += p.Legendary.ToString();
+            retVal += "|";
+            retVal += p.Shiny.ToString();
+            retVal += "|";
+            retVal += p.Generation.ToString();
+            return retVal;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            DebugtextBox.Clear();
-            DebugtextBox.Text += NametextBox.Text;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += TypetextBox.Text;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += LevelnumericUpDown.Value;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += AttackTypenumericUpDown.Value;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += HpnumericUpDown.Value;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += ExpnumericUpDown.Value;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += LegendarycheckBox.Checked;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += ShinycheckBox.Checked;
-            DebugtextBox.Text += "|";
-            DebugtextBox.Text += GenerationnumericUpDown.Value;
-
-            StreamWriter outFile = new StreamWriter("Pokemon.txt");
-            outFile.Write(DebugtextBox.Text);
-            outFile.Close();
+            save();
+            
         }
-        private void DebugtextBox_TextChanged(object sender, EventArgs e)
+        private void ShowPokemon(Pokemon p)
         {
+            NametextBox.Text = p.Name;
+            TypetextBox.Text = p.Type;
+            LevelnumericUpDown.Value = p.Level;
+            AttackTypecomboBox.Text = p.AttackType.ToString();
+            HpnumericUpDown.Value = p.Hp;
+            ExpnumericUpDown.Value = p.Exp;
+            LegendarycheckBox.Checked = p.Legendary;
+            ShinycheckBox.Checked = p.Shiny;
+            GenerationnumericUpDown.Value = p.Generation;
 
+
+
+        }
+
+        private void Firstbutton_Click(object sender, EventArgs e)
+        {
+            save();
+            current = 0;
+            Currentlabel.Text = current.ToString();
+            ShowPokemon(pokemons[current]);
+        }
+
+        private void Lastbutton_Click(object sender, EventArgs e)
+        {
+            save();
+            current = count -1;
+            Currentlabel.Text = current.ToString();
+            ShowPokemon(pokemons[current]);
+
+        }
+
+        private void Previousbutton_Click(object sender, EventArgs e)
+        {
+            if (current > 0)
+            {
+                save();
+                current--;
+                Currentlabel.Text = current.ToString();
+                ShowPokemon(pokemons[current]);
+
+            }
+
+        }
+
+        private void Nextbutton_Click(object sender, EventArgs e)
+        {
+            if (current < count -1)
+            {
+                save();
+                current++;
+                Currentlabel.Text = current.ToString();
+                ShowPokemon(pokemons[current]);
+
+            }
+        }
+        private void clear()
+        {
+            NametextBox.Text = " ";
+            TypetextBox.Text = " ";
+            LevelnumericUpDown.Value = 0;
+            AttackTypecomboBox.Text = " ";
+            HpnumericUpDown.Value = 0;
+            ExpnumericUpDown.Value = 0;
+            LegendarycheckBox.Checked = false;
+            ShinycheckBox.Checked = false;
+            GenerationnumericUpDown.Value = 0;
+
+        }
+        private void Newbutton_Click(object sender, EventArgs e)
+        {
+            current = count;
+            count++;
+            clear();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            save();
         }
     }
 }
